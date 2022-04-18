@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1778
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lsy.RedisCore.Test", "Lsy.RedisCore.Test\Lsy.RedisCore.Test.csproj", "{922CE77D-70C1-4EC9-90CD-C650D3B6FA1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lsy.RedisCore.Package", "Lsy.RedisCore.Package\Lsy.RedisCore.Package.csproj", "{AC22A7DB-77A2-440C-8632-7D6FC058EAEA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{922CE77D-70C1-4EC9-90CD-C650D3B6FA1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{922CE77D-70C1-4EC9-90CD-C650D3B6FA1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{922CE77D-70C1-4EC9-90CD-C650D3B6FA1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{922CE77D-70C1-4EC9-90CD-C650D3B6FA1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC22A7DB-77A2-440C-8632-7D6FC058EAEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC22A7DB-77A2-440C-8632-7D6FC058EAEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC22A7DB-77A2-440C-8632-7D6FC058EAEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC22A7DB-77A2-440C-8632-7D6FC058EAEA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F5B5C50C-EC4A-45B6-A08A-A0ED103DB4BF}
+	EndGlobalSection
+EndGlobal
