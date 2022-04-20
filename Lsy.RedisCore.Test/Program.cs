@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
+using Newtonsoft.Json;
 
 namespace Lsy.RedisCore.Test
 {
@@ -21,10 +22,37 @@ namespace Lsy.RedisCore.Test
             {
                 var sw = System.Diagnostics.Stopwatch.StartNew();
 
+                //预加载导航属性
+                var employee = myDb.Employees
+                    .Include(p => p.Salaries)
+                    .Single(p => p.EmpNo == 100001);
+
                 var firstQuery = myDb.Employees
-                    .Where(p => p.EmpNo == 10001);
-                var result = firstQuery.ToList();
+                    .Single(p => p.EmpNo == 10001);
+                //显式加载导航属性,需设置 QueryTrackingBehavior.TrackAll
+                myDb.Entry(firstQuery)
+                    .Collection(p=>p.Salaries)
+                    .Load();
+
+                //还有一种懒加载
+
+                //执行原始SQL
+                var empNo = 100001;
+                var query1 = myDb.Employees
+                    .FromSqlRaw("select * from employees where emp_no = {0}", empNo).ToList();
+
+                var query2 = myDb.Employees
+                    .FromSqlInterpolated($"select * from employees where emp_no = {empNo}").ToList();
+
+                var emp_no = new MySqlParameter("emp_no", 100001);
+                var query3 = myDb.Employees
+                    .FromSqlRaw($"select * from employees where emp_no = @emp_no", emp_no).ToList();
                 sw.Stop();
+
+                var jsonString = JsonConvert.SerializeObject(employee, null,
+                    new JsonSerializerSettings() {
+                        //循环引用不序列化
+                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
                 Console.WriteLine(sw.ElapsedMilliseconds);
             }
 

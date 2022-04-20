@@ -22,7 +22,7 @@ namespace Lsy.RedisCore.Test.Models
             //optionsBuilder.EnableSensitiveDataLogging(true);
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseMySQL(_connString, providerOptions => providerOptions.CommandTimeout(60))
-                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+                .UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll)
                 .UseLoggerFactory(loggerFactory);
         }
 
