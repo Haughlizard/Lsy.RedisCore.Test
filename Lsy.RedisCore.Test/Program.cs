@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using Lsy.RedisCore.Test.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 
 namespace Lsy.RedisCore.Test
 {
@@ -14,13 +16,13 @@ namespace Lsy.RedisCore.Test
         private static readonly string _connString = "Server=127.0.0.1;Database=employees;Uid=root;Pwd=root;";
         static void Main(string[] args)
         {
+
             using (EmployeesContext myDb = new EmployeesContext(_connString))
             {
                 var sw = System.Diagnostics.Stopwatch.StartNew();
-                var firstQuery = myDb.Employees.Include(p=>p.Salaries)
-                    .Where<Employee>(p => p.EmpNo == 10001)
-                    .FirstOrDefault()
-                    .Salaries;
+
+                var firstQuery = myDb.Employees
+                    .Where(p => p.EmpNo == 10001);
                 var result = firstQuery.ToList();
                 sw.Stop();
                 Console.WriteLine(sw.ElapsedMilliseconds);

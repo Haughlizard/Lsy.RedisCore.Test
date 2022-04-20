@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,15 +9,21 @@ namespace Lsy.RedisCore.Test.Models
     class EmployeesContext:DbContext
     {
         private string _connString;
+        private static readonly ILoggerFactory loggerFactory =
+            LoggerFactory.Create(builder => {
+                builder.AddConsole();
+            });
         public EmployeesContext(string connString)
         {
             _connString = connString;
         }
         protected override void  OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            //optionsBuilder.EnableSensitiveDataLogging(true);
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseMySQL(_connString, providerOptions => providerOptions.CommandTimeout(60))
-                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+                .UseLoggerFactory(loggerFactory);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
